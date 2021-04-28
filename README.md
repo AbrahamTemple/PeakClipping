@@ -73,7 +73,7 @@ public void MsOrderMessage(MsOrder order) {
 
 ![Screenshot](Result/demo4)
 
-- 并且该订单如果查也只能在缓存中查到
+- 并且该订单如果查也只能在缓存中被查到
 
 ![Screenshot](Result/demo5)
 
