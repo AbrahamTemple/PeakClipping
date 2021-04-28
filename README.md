@@ -34,11 +34,9 @@ public RestResponse<MsOrder> get(String pid) {
 - 创建订单数据模块
 
 ``` java
-public RestResponse<String> add(String user, Integer spend){
-  String idCode = user + new Date().getTime();
-  String pid = UUID.nameUUIDFromBytes(idCode.getBytes()).toString();
-  MsOrder order = new MsOrder(user,pid,spend);
-  return new RestResponse<String>(HttpStatus.CREATED.value(),HttpStatus.CREATED.toString(),mqService.makeOrder(order));
+public String makeOrder(MsOrder order){
+   rabbitTemplate.convertAndSend(exchangeName,"write",order);
+   return "订单已提交处理，您可以通过订单号--"+order.getPid()+"--查询订单状态";
 }
 ```
 
