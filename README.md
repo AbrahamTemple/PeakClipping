@@ -59,7 +59,7 @@ public void MsOrderMessage(MsOrder order) {
 
 ## 演示结果
 
-- 很早就被创建的订单只能在数据库查到到
+- 很早就被创建的订单只能在Mysql数据库查到到
 
 ![Screenshot](Result/demo1.png)
 
@@ -73,7 +73,7 @@ public void MsOrderMessage(MsOrder order) {
 
 ![Screenshot](Result/demo4.png)
 
-- 并且该订单如果查也只能在缓存中被查到
+- 并且该订单如果查也只能在Redis缓存中被查到
 
 ![Screenshot](Result/demo5.png)
 
