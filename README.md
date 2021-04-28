@@ -61,20 +61,20 @@ public void MsOrderMessage(MsOrder order) {
 
 - 很早就被创建的订单只能在数据库查到到
 
-![Screenshot](Result/demo1)
+![Screenshot](Result/demo1.png)
 
-![Screenshot](Result/demo7)
+![Screenshot](Result/demo7.png)
 
 - 从现在开始被创建的订单既会持久化也会缓存
 
-![Screenshot](Result/demo2)
+![Screenshot](Result/demo2.png)
 
-![Screenshot](Result/demo3)
+![Screenshot](Result/demo3.png)
 
-![Screenshot](Result/demo4)
+![Screenshot](Result/demo4.png)
 
 - 并且该订单如果查也只能在缓存中被查到
 
-![Screenshot](Result/demo5)
+![Screenshot](Result/demo5.png)
 
-![Screenshot](Result/demo6)
+![Screenshot](Result/demo6.png)
