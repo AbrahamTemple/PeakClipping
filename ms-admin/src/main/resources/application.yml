@@ -1,0 +1,51 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: ms-admin
+  rabbitmq:
+    host: ${ms-common.rabbitmq.host}
+    username: ${ms-common.rabbitmq.username}
+    password: ${ms-common.rabbitmq.password}
+    virtual-host: /
+    port: ${ms-common.rabbitmq.port}
+  redis:
+    host: ${ms-common.rabbitmq.host}
+    password: ${ms-common.rabbitmq.password}
+    port: ${ms-common.redis.port}
+    jedis:
+      pool:
+        min-idle: 2
+        max-idle: 10
+  datasource:
+    username: ${ms-common.msql.username}
+    password: ${ms-common.msql.password}
+    url: jdbc:mysql://${ms-common.msql.host}:${ms-common.msql.port}/ms?serverTimezone=GMT&amp&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource #更改数据库的数据源为druid
+    # druid继承的默认属性
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMinllis: 60000
+    minEvictableIdleTimeMills: 300000
+    # validationQuery: SELECT 1 FROM ...
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # druid自己的支持第三方插件与监控配置
+    filters: start,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #配置日志
+  global-config:
+    db-config:
+      logic-delete-value: 1 #删除了逻辑删除字段更新为1
+      logic-not-delete-value: 0 #对应逻辑删除字段默认为0
