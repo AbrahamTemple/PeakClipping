@@ -27,7 +27,8 @@ public RestResponse<MsOrder> get(String pid) {
     if (order != null){
       log.info("订单在Mysql中被查到");
       return new RestResponse<MsOrder>(HttpStatus.OK.value(), HttpStatus.OK.toString(),order);
-    } return new RestResponse<MsOrder>(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.toString(),null);
+    } log.info("找不到该订单信息");
+    return new RestResponse<MsOrder>(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.toString(),null);
 }
 ```
 
@@ -41,6 +42,7 @@ public String makeOrder(MsOrder order){
 ```
 
 ``` java
+@Transactional
 @RabbitHandler
 @RabbitListener(queues = "ms_order")
 public void MsOrderMessage(MsOrder order) {
@@ -49,7 +51,7 @@ public void MsOrderMessage(MsOrder order) {
       redisUtil.set(order.getPid(), order, 1800);
       log.info("订单--"+order.getPid()+"--已被缓存，半小时后自动清除");
     } else {
-      log.info("订单提交失败");
+      log.info("订单提交失败,事务回滚...");
       throw new OrderException("订单提交失败");
     }
 }
