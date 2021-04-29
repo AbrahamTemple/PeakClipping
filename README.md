@@ -20,14 +20,14 @@
 public RestResponse<MsOrder> get(String pid) {
    MsOrder order = (MsOrder) redisUtil.get(pid);
     if(order != null) {
-      log.info("订单在Redis中被查到");
+      log.info("订单在Redis中被查到!");
       return new RestResponse<MsOrder>(HttpStatus.OK.value(), HttpStatus.OK.toString(),order);
     }
     order = iMsOrderService.getOrderByPid(pid);
     if (order != null){
-      log.info("订单在Mysql中被查到");
+      log.info("订单在Mysql中被查到!");
       return new RestResponse<MsOrder>(HttpStatus.OK.value(), HttpStatus.OK.toString(),order);
-    } log.info("找不到该订单信息");
+    } log.info("找不到该订单信息!");
     return new RestResponse<MsOrder>(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.toString(),null);
 }
 ```
@@ -37,7 +37,7 @@ public RestResponse<MsOrder> get(String pid) {
 ``` java
 public String makeOrder(MsOrder order){
    rabbitTemplate.convertAndSend(exchangeName,"write",order);
-   return "订单已提交处理，您可以通过订单号--"+order.getPid()+"--查询订单状态";
+   return "订单已提交处理,您可以通过订单号--"+order.getPid()+"--查询订单状态";
 }
 ```
 
@@ -49,10 +49,10 @@ public void MsOrderMessage(MsOrder order) {
   boolean created = iMsOrderService.save(order);
     if(created) {
       redisUtil.set(order.getPid(), order, 1800);
-      log.info("订单--"+order.getPid()+"--已被缓存，半小时后自动清除");
+      log.info("订单--"+order.getPid()+"--已被缓存,半小时后自动清除");
     } else {
       log.info("订单提交失败,事务回滚...");
-      throw new OrderException("订单提交失败");
+      throw new OrderException("订单提交失败!");
     }
 }
 ```
