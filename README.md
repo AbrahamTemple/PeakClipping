@@ -1,4 +1,4 @@
-# 基于RabbitMQ和Redis做的流量削峰简单版
+# 基于RabbitMQ和Redis做的流量削峰
 
 我们都明白某一瞬间突发的高峰访问量全打Mysql上将是容易冲垮数据库的
 
