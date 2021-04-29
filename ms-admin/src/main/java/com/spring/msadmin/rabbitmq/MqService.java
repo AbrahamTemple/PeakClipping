@@ -18,7 +18,7 @@ public class MqService {
 
     public String makeOrder(MsOrder order){
         rabbitTemplate.convertAndSend(exchangeName,"write",order);
-        return "订单已提交处理，您可以通过订单号--"+order.getPid()+"--查询订单状态";
+        return "订单信息已被提交,您可以通过订单号--"+order.getPid()+"--查看订单状态";
     }
 
 }

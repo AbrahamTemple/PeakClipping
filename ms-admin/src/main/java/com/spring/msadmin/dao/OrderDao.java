@@ -39,6 +39,7 @@ public class OrderDao {
         if (order != null){
             log.info("订单在Mysql中被查到");
             return new RestResponse<MsOrder>(HttpStatus.OK.value(), HttpStatus.OK.toString(),order);
-        } return new RestResponse<MsOrder>(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.toString(),null);
+        } log.info("找不到该订单信息");
+        return new RestResponse<MsOrder>(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.toString(),null);
     }
 }
